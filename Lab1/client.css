@@ -1,0 +1,79 @@
+body{
+  background-color: #d0e4f3;
+  margin-top: 100px;
+}
+
+div.view{
+  margin: auto;
+  top: 100px;
+  width: 600px;
+  height: 400px;
+}
+div.image{
+  position: absolute;
+  width: 340px;
+  height: 400px;
+  float: left;
+  border: 1px solid black;
+}
+
+div.rightmenu{
+  width: 250px;
+  height: 400px;
+  margin: auto;
+  display: inline-block;
+  float: right;
+}
+
+div.login{
+  background-color: #FFFFFF;
+  position: relative;
+  float: right;
+  width: 250px;
+  height: 90px;
+  border: 1px solid black;
+  padding-top: 20px;
+
+}
+
+div.signup{
+  margin-top: 9px;
+  background-color: #FFFFFF;
+  float: right;
+  width: 250px;
+  height: 279px;
+  border: 1px solid black;
+}
+
+h3 {
+  text-align: center;
+  line-height: 0.9;
+}
+
+p.lower{
+  line-height: 0.6;
+}
+
+input[type=submit]{
+  width: 60px;
+  height: 20px;
+  margin-left: 190px;
+}
+
+input[type=text]{
+  width: 150px;
+  height: 20px;
+  float:right;
+}
+
+input[type=email]{
+  width: 150px;
+  height: 20px;
+  float: right;
+}
+
+#dropdown{
+  width: 150px;
+  height: 20px;
+  float:right;
+}
