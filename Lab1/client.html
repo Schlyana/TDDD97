@@ -10,7 +10,7 @@
         </div>
         <div class=rightmenu>
           <div class="login">
-            <form>
+            <form name="signin" id="signin" onsubmit="return signIn(email.value, password.value)">
               <p class="lower">Email
               <input type="email" name="email" required></p>
               <p class="lower">Password
@@ -21,7 +21,7 @@
 
           <div class="signup">
             <h3>Sign up here</h3>
-            <form name="signup" onsubmit="return passwordCheck(password.value, reppassword.value)">
+            <form name="signup" id="signup" onsubmit="return passwordCheck(password.value, reppassword.value)">
               <p class="lower">First name
               <input type="text" name="firstname" required></p>
               <p class="lower">Family name
