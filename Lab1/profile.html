@@ -1,0 +1,60 @@
+<html>
+  <head>
+    <link href="profile.css" type="text/css" rel="stylesheet">
+    <script>
+    function showHome(){
+      document.getElementById('home').style.display = "block";
+      document.getElementById('browse').style.display = "none";
+      document.getElementById('account').style.display = "none";
+    }
+    function showBrowse(){
+      document.getElementById("home").style.display = "none";
+      document.getElementById("browse").style.display = "block";
+      document.getElementById("account").style.display = "none";
+    }
+    function showAccount(){
+      document.getElementById("home").style.display = "none";
+      document.getElementById("browse").style.display = "none";
+      document.getElementById("account").style.display = "block";
+    }
+    </script>
+  </head>
+  <body>
+    <div class="tab">
+      <div class="homeTab" onclick="showHome()">
+        <p class="tabs">Home<p>
+      </div>
+
+      <div class="browseTab" onclick="showBrowse()">
+        <p class="tabs">Browse<p>
+      </div>
+
+      <div class="accountTab" onclick="showAccount()">
+        <p class="tabs">Account<p>
+      </div>
+    </div>
+
+    <div class="home" id="home">
+      Hej kom och hjälp mig
+    </div>
+
+    <div class="browse" id="browse">
+      Hej jag hjälper dig
+    </div>
+
+    <div class="account" id="account">
+      <div class="changePassword">
+          <h3>Change password</h3>
+        <form name="changePassword" id="changePassword">
+          <p class="pwtext">Old password
+          <input type="password" name="oldpassword" required></p>
+          <p class="pwtext">New password
+          <input type="password" name="newpassword" required></p>
+        </form>
+      </div>
+
+      <input type="button" onclick="logout()">
+    </div>
+
+  </body>
+</html>

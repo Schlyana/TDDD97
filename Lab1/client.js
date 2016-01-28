@@ -1,6 +1,14 @@
 displayView = function(){
-  view = document.getElementById("welcomeview").innerHTML;
-  viewer = document.getElementById("viewer");
+
+  if (localStorage.getItem("Token") != null){
+    view = document.getElementById("profileview").innerHTML;
+    viewer = document.getElementById("viewer");
+  }
+  else{
+    view = document.getElementById("welcomeview").innerHTML;
+    viewer = document.getElementById("viewer");
+  }
+
   viewer.innerHTML = view;
 }
 window.onload = function(){
@@ -11,13 +19,12 @@ window.onload = function(){
 }
 
 function signIn(email, password){
-  alert(email)
-  alert(password)
   result = serverstub.signIn(email,password)
 
   if (result.success){
     alert(result.message)
     token = result.data
+    localStorage.setItem("Token", token);
     return submitFlag=true;
   }
   else {
@@ -43,7 +50,7 @@ function passwordCheck(pw, reppw){
       'password': document.signup.password.value,
       'firstname': document.signup.firstname.value,
       'familyname': document.signup.lastname.value,
-      'gender': document.signup.gender.value, /*<---- FEL*/
+      'gender': document.signup.dropdown.value,
       'city': document.signup.city.value,
       'country': document.signup.country.value
     };
