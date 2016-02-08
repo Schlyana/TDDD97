@@ -17,6 +17,25 @@
       document.getElementById("browse").style.display = "none";
       document.getElementById("account").style.display = "block";
     }
+
+    function changePassword(){
+      token = localStorage.getItem("Token");
+      oldpassword = document.changePassword.oldpassword.value;
+      newpassword = document.changePassword.newpassword.value;
+      result = serverstub.changePassword(token, oldpassword, newpassword);
+      alert(result.message)
+      return submitFlag=result.success;
+    }
+
+    function logout(){
+      token = localStorage.getItem("Token");
+      result = serverstub.signOut(token);
+      alert(result.message)
+      if (result.success){
+        localStorage.setItem("Token", null);
+        displayView();
+      }
+    }
     </script>
   </head>
   <body>
@@ -45,15 +64,16 @@
     <div class="account" id="account">
       <div class="changePassword">
           <h3>Change password</h3>
-        <form name="changePassword" id="changePassword">
+        <form name="changePassword" id="changePassword" onsubmit="return changePassword()">
           <p class="pwtext">Old password
           <input type="password" name="oldpassword" required></p>
           <p class="pwtext">New password
           <input type="password" name="newpassword" required></p>
+          <input type="submit" value="ChangePassword">
         </form>
       </div>
 
-      <input type="button" onclick="logout()">
+      <button type="button" onclick="logout()">Log out</button>
     </div>
 
   </body>

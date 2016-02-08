@@ -9,13 +9,14 @@
           <img src=wimage.png>
         </div>
         <div class=rightmenu>
+
           <div class="login">
             <form name="signin" id="signin" onsubmit="return signIn(email.value, password.value)">
               <p class="lower">Email
               <input type="email" name="email" required></p>
               <p class="lower">Password
               <input type="text" name="password" required></p>
-              <input type="submit" value="login">
+              <input class="welcomesubmit" type="submit" value="login">
             </form>
           </div>
 
@@ -42,13 +43,84 @@
               <p class="lower">Repeat PSW
               <input type="text" name="reppassword" required></p>
 
-              <input type="submit" value="SignUp">
+              <input type="submit" class="welcomesubmit" value="SignUp">
             </form>
           </div>
         </div
       </div>
     </script>
-    <script type="text/view" id="profileview">Get rekt</script>
+    <script type="text/view" id="profileview">
+      <div class="tab">
+        <div class="homeTab" onclick="showHome(localStorage.getItem('email'))">
+          <p class="tabs">Home<p>
+        </div>
+
+        <div class="browseTab" onclick="showBrowse()">
+          <p class="tabs">Browse<p>
+        </div>
+
+        <div class="accountTab" onclick="showAccount()">
+          <p class="tabs">Account<p>
+        </div>
+      </div>
+
+      <div class="home" id="home">
+        <div class="messages" id="messages">
+        </div>
+
+        <div class="personalinfo" id="personalinfo" >
+          <h3>User information </h3>
+          <div class="headerfields">
+            Email: <br>
+            First name: <br>
+            Last name: <br>
+            Gender: <br>
+            City: <br>
+            Country
+
+          </div>
+
+          <div class="infofields" id="infofields">
+          </div>
+        </div>
+
+        <div class="postmessage" id="postmessage">
+          <h3>Post a message</h3>
+          <form onsubmit="return postMessage()">
+            <textarea name="messagearea" id="messagearea" rows="10" cols="39" onsubmit="return postMessage()">Type message here</textarea>
+            <br>
+            <input type="submit">
+          </form>
+          <button class="update" type="button" onclick="printMessages()">Update</button>
+        </div>
+      </div>
+
+      <div class="browse" id="browse">
+        <div class="browseUser">
+          <h3>Browse users</h3>
+          <form name=browseuser id=browseuser onsubmit="showHome(document.browseuser.browsemail.value)">
+            User email
+            <input type="text" name="browsemail" required><br>
+            <input type="submit" value="Search">
+          </form>
+        </div>
+      </div>
+
+      <div class="account" id="account">
+        <div class="changePasswordW">
+            <h3>Change password</h3>
+          <form name="changepassword" id="changepassword" onsubmit="return changePassword()">
+            <p class="pwtext">Old password
+            <input type="password" name="oldpassword" required></p>
+            <p class="pwtext">New password
+            <input type="password" name="newpassword" required></p>
+            <input class="passwordsubmit" type="submit" value="ChangePassword">
+          </form>
+        </div>
+
+        <button class="logout" type="button" onclick="logout()">Log out</button>
+      </div>
+    </script>
   </head>
   <body>
     <div id="viewer">

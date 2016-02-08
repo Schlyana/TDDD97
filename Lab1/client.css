@@ -52,12 +52,20 @@ h3 {
 
 p.lower{
   line-height: 0.6;
+  margin-right: 5px;
+  margin-left: 5px;
 }
 
-input[type=submit]{
+input.welcomesubmit{
   width: 60px;
   height: 20px;
-  margin-left: 190px;
+  float: right;
+  margin-right: 5px;
+}
+
+input.passwordsubmit{
+  float:right;
+  margin-right: 5px;
 }
 
 input[type=text]{
@@ -72,8 +80,146 @@ input[type=email]{
   float: right;
 }
 
+button.logout{
+  margin-top: 50px;
+  margin-left: 50px;
+}
+
 #dropdown{
   width: 150px;
   height: 20px;
   float:right;
+}
+
+div.tab{
+  background-color: #F0F0F0;
+  width: 1000px;
+  height: 50px;
+  border: 1px solid black;
+}
+
+div.homeTab{
+  background-color: #FFFFFF;
+  width: 300px;
+  height: 40px;
+  float: left;
+  margin-left: 16px;
+  margin-top: 4px;
+  text-align: center;
+  border: 1px solid black;
+}
+
+div.browseTab{
+  background-color: #FFFFFF;
+  width: 300px;
+  height: 40px;
+  margin-left: 30px;
+  margin-top: 4px;
+  float: left;
+  text-align: center;
+  border: 1px solid black;
+}
+
+div.accountTab{
+  background-color: #FFFFFF;
+  width: 300px;
+  height: 40px;
+  margin-left: 30px;
+  margin-top: 4px;
+  float: left;
+  text-align: center;
+  border: 1px solid black;
+}
+
+p.tabs{
+  margin-top: 10px;
+}
+
+div.home{
+  background: #F0F0F0;
+  width: 1000px;
+  height: 700px;
+  margin-top: 50px;
+  display: block;
+  border: 1px solid black;
+}
+
+div.messages{
+  background-color: #FFFFFF;
+  width: 688px;
+  height: 690px;
+  float: left;
+  border: 1px solid black;
+  margin-left: 4px;
+  margin-top: 4px;
+}
+
+div.personalinfo{
+  background-color: #FFFFFF;
+  width: 298px;
+  height: 170px;
+  float: right;
+  border: 1px solid black;
+  margin-right: 4px;
+  margin-top: 4px;
+}
+
+div.postmessage{
+  background-color: #FFFFFF;
+  width: 298px;
+  height: 514px;
+  float: left;
+  border: 1px solid black;
+  margin-left: 2px;
+  margin-top: 4px;
+}
+
+div.headerfields{
+  float:left;
+  margin-left: 5px;
+}
+
+div.infofields{
+  margin-left: 100px;
+}
+
+div.browse{
+  background: #F0F0F0;
+  width: 1000px;
+  height: 700px;
+  margin-top: 50px;
+  display: none;
+  border: 1px solid black;
+}
+
+div.account{
+  background: #F0F0F0;
+  width: 1000px;
+  height: 700px;
+  margin-top: 50px;
+  display: none;
+  border: 1px solid black;
+}
+
+div.changePasswordW{
+  background-color: #FFFFFF;
+  width: 300px;
+  height: 400px;
+  margin-left: 50px;
+  margin-top: 50px;
+  border: 1px solid black;
+}
+
+div.browseUser{
+  background-color: #FFFFFF;
+  width: 300px;
+  height: 200px;
+  margin-left: 50px;
+  margin-top: 50px;
+  border: 1px solid black;
+}
+
+input[type=password]{
+  float:right;
+  margin-right: 5px;
 }
