@@ -15,7 +15,9 @@
               <p class="lower">Email
               <input type="email" name="email" required></p>
               <p class="lower">Password
-              <input type="text" name="password" required></p>
+              <input class="pw" type="password" name="password" required></p>
+              <div class="errormsg" id="errorsignin">
+              </div>
               <input class="welcomesubmit" type="submit" value="login">
             </form>
           </div>
@@ -39,10 +41,11 @@
               <p class="lower">Email
               <input type="email" name="email" required></p>
               <p class="lower">Password
-              <input type="text" name="password" required></p>
+              <input class="pw" type="password" name="password" required></p>
               <p class="lower">Repeat PSW
-              <input type="text" name="reppassword" required></p>
-
+              <input class="pw" type="password" name="reppassword" required></p>
+              <div class="errormsg" id="errorsignup">
+              </div>
               <input type="submit" class="welcomesubmit" value="SignUp">
             </form>
           </div>
@@ -50,75 +53,123 @@
       </div>
     </script>
     <script type="text/view" id="profileview">
-      <div class="tab">
-        <div class="homeTab" onclick="showHome(localStorage.getItem('email'))">
-          <p class="tabs">Home<p>
-        </div>
-
-        <div class="browseTab" onclick="showBrowse()">
-          <p class="tabs">Browse<p>
-        </div>
-
-        <div class="accountTab" onclick="showAccount()">
-          <p class="tabs">Account<p>
-        </div>
-      </div>
-
-      <div class="home" id="home">
-        <div class="messages" id="messages">
-        </div>
-
-        <div class="personalinfo" id="personalinfo" >
-          <h3>User information </h3>
-          <div class="headerfields">
-            Email: <br>
-            First name: <br>
-            Last name: <br>
-            Gender: <br>
-            City: <br>
-            Country
-
+      <div class="center">
+        <div class="tab">
+          <div class="homeTab" id="homeTab" onclick="showHome(localStorage.getItem('userEmail'))">
+            <p class="tabs">Home<p>
           </div>
 
-          <div class="infofields" id="infofields">
+          <div class="browseTab" id="browseTab" onclick="showBrowse()">
+            <p class="tabs">Browse<p>
+          </div>
+
+          <div class="accountTab" id="accountTab" onclick="showAccount()">
+            <p class="tabs">Account<p>
           </div>
         </div>
 
-        <div class="postmessage" id="postmessage">
-          <h3>Post a message</h3>
-          <form onsubmit="return postMessage()">
-            <textarea name="messagearea" id="messagearea" rows="10" cols="39" onsubmit="return postMessage()">Type message here</textarea>
+        <div class="home" id="home">
+          <div class="messages" id="messages">
+            <h3>Message wall</h3>
+          </div>
+
+          <div class="personalinfo" id="personalinfo" >
+            <h3>User information </h3>
+            <div class="headerfields">
+              Email: <br>
+              First name: <br>
+              Last name: <br>
+              Gender: <br>
+              City: <br>
+              Country
+
+            </div>
+
+            <div class="infofields" id="infofields">
+            </div>
+          </div>
+
+          <div class="postmessage" id="postmessage">
+            <h3>Post a message</h3>
+            <form onsubmit="return postHome()">
+              <textarea name="messagearea" id="messagearea" rows="10" cols="30" onsubmit="return postMessage()">Type message here</textarea>
+              <br>
+              <input type="submit">
+              <br>
+              <div class="errormsg" id="errorpost">
+              </div>
+            </form>
+            <button class="update" type="button" onclick="printHome(localStorage.getItem('tempEmail'))">Update</button>
             <br>
-            <input type="submit">
-          </form>
-          <button class="update" type="button" onclick="printMessages()">Update</button>
-        </div>
-      </div>
-
-      <div class="browse" id="browse">
-        <div class="browseUser">
-          <h3>Browse users</h3>
-          <form name=browseuser id=browseuser onsubmit="showHome(document.browseuser.browsemail.value)">
-            User email
-            <input type="text" name="browsemail" required><br>
-            <input type="submit" value="Search">
-          </form>
-        </div>
-      </div>
-
-      <div class="account" id="account">
-        <div class="changePasswordW">
-            <h3>Change password</h3>
-          <form name="changepassword" id="changepassword" onsubmit="return changePassword()">
-            <p class="pwtext">Old password
-            <input type="password" name="oldpassword" required></p>
-            <p class="pwtext">New password
-            <input type="password" name="newpassword" required></p>
-            <input class="passwordsubmit" type="submit" value="ChangePassword">
-          </form>
+            <div class="errormsg" id="errorupdate">
+            </div>
+          </div>
         </div>
 
-        <button class="logout" type="button" onclick="logout()">Log out</button>
+        <div class="browse" id="browse">
+          <div class="messages" id="browsemessages">
+            <h3>Message wall</h3>
+          </div>
+
+          <div class="personalinfo" id="browsepersonalinfo" >
+            <h3>User information </h3>
+            <div class="headerfields">
+              Email: <br>
+              First name: <br>
+              Last name: <br>
+              Gender: <br>
+              City: <br>
+              Country
+
+            </div>
+
+            <div class="infofields" id="browseinfofields">
+            </div>
+          </div>
+
+          <div class="postmessage" id="browsepostmessage">
+            <h3>Post a message</h3>
+            <form onsubmit="return postBrowse()">
+              <textarea name="messagearea" id="browsemessagearea" rows="10" cols="30" onsubmit="return postMessage()">Type message here</textarea>
+              <br>
+              <input type="submit">
+              <br>
+              <div class="errormsg" id="errorbrowsepost">
+              </div>
+            </form>
+            <button class="update" type="button" onclick="printBrowse(localStorage.getItem('tempEmail'))">Update</button>
+            <br>
+            <div class="errormsg" id="errorbrowseupdate">
+            </div>
+            <div class="browseUser">
+              <h3>Browse users</h3>
+              <form name="browseuser" id="browseuser" onsubmit="return findUser(document.browseuser.browsemail.value)">
+                User email
+                <input type="email" name="browsemail" required><br>
+                <input type="submit" value="Search">
+                <div class="errormsg" id="errorbrowse">
+                </div>
+              </form>
+            </div>
+          </div>
+
+
+        </div>
+
+        <div class="account" id="account">
+          <div class="changePasswordW">
+              <h3>Change password</h3>
+            <form name="changepassword" id="changepassword" onsubmit="return changePassword()">
+              <p class="pwtext">Old password
+              <input type="password" name="oldpassword" required></p>
+              <p class="pwtext">New password
+              <input type="password" name="newpassword" required></p>
+              <input class="passwordsubmit" type="submit" value="ChangePassword">
+            </form>
+          </div>
+
+          <button class="logout" type="button" onclick="logout()">Log out</button>
+        </div>
       </div>
     </script>
   </head>
