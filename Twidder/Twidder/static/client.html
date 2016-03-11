@@ -1,24 +1,23 @@
 <html>
   <head>
-    <link href="client.css" type="text/css" rel="stylesheet">
-    <script src="client.js" type="text/javascript"></script>
-    <script src="serverstub.js" type="text/javascript"></script>
+    <link href="/static/client.css" type="text/css" rel="stylesheet">
+    <script src="/static/client.js" type="text/javascript"></script>
     <script type="text/view" id="welcomeview">
       <div class="view">
         <div class="image">
-          <img src=wimage.png>
+          <img src=/static/wimage.png>
         </div>
         <div class=rightmenu>
 
           <div class="login">
-            <form name="signin" id="signin" onsubmit="return signIn(email.value, password.value)">
+            <form name="signin" id="signin">
               <p class="lower">Email
               <input type="email" name="email" required></p>
               <p class="lower">Password
               <input class="pw" type="password" name="password" required></p>
               <div class="errormsg" id="errorsignin">
               </div>
-              <input class="welcomesubmit" type="submit" value="login">
+              <input class="welcomesubmit" type="button" onclick="socketConnect(email.value, password.value)" value="login">
             </form>
           </div>
 
@@ -99,7 +98,7 @@
               <div class="errormsg" id="errorpost">
               </div>
             </form>
-            <button class="update" type="button" onclick="printHome(localStorage.getItem('tempEmail'))">Update</button>
+            <button class="update" type="button" onclick="getMessages(localStorage.getItem('tempEmail'),'home')">Update</button>
             <br>
             <div class="errormsg" id="errorupdate">
             </div>
@@ -137,7 +136,7 @@
               <div class="errormsg" id="errorbrowsepost">
               </div>
             </form>
-            <button class="update" type="button" onclick="printBrowse(localStorage.getItem('tempEmail'))">Update</button>
+            <button class="update" type="button" onclick="getMessages(localStorage.getItem('browseEmail'),'browse')">Update</button>
             <br>
             <div class="errormsg" id="errorbrowseupdate">
             </div>

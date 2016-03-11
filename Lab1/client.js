@@ -105,16 +105,13 @@ function showAccount(){
 
 function findUser(email){
   result = serverstub.getUserDataByEmail(localStorage.getItem("Token"),email)
-  alert(result.data)
   if (result.data !== undefined){
-    alert("found user")
     pi = personalInformation(email);
     document.getElementById("browseinfofields").innerHTML = pi;
     printBrowse(email);
     return submitFlag=false;
   }
   else{
-    alert("no found user")
     document.getElementById("errorbrowse").innerHTML = result.message;
     return submitFlag=false;
   }
@@ -126,14 +123,14 @@ function changePassword(){
   newpassword = document.changepassword.newpassword.value;
 
   result = serverstub.changePassword(token, oldpassword, newpassword);
-  //alert(result.message)
+  //Add reponse when password changed
+  document.getElementById("errorchangepw").innerHTML = result.message;
   return submitFlag=false;
 }
 
 function logout(){
   token = localStorage.getItem("Token");
   result = serverstub.signOut(token);
-  //alert(result.message)
   if (result.success){
     localStorage.removeItem("Token");
     localStorage.removeItem("userEmail");

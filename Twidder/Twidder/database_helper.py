@@ -3,8 +3,7 @@ from contextlib import closing
 import sqlite3
 import json
 import random
-
-app = Flask(__name__)
+from Twidder import app
 
 def connect_db():
     return sqlite3.connect("database.db")
@@ -66,14 +65,37 @@ def check_user(email, password, firstname, familyname, gender, city, country):
     json_response = json.dumps(json_response)
     return json_response
 
+def get_token_by_email(email):
+    c = connect_db()
+    cursor = c.cursor()
+    print "------get_token_by_email-------"
+    cursor.execute("select token from Users where email = '" + email + "'")
+    token = cursor.fetchone()
+    print(token)
+    if (token[0] is None):
+        print "No token"
+        json_response = response_builder(False, "User not signed in", "")
+    else:
+        print "Token retrevied"
+        json_response = response_builder(True, "Token retrevied", token[0])
+    c.commit()
+    c.close()
+    return json.dumps(json_response)
+
 def get_token(token):
     c = connect_db()
     cursor = c.cursor()
+    print "-------get_token---------"
+    print(token)
     cursor.execute("select token from Users where token = '" + token + "'")
     user = cursor.fetchone()
+    print "Token"
+    print(user)
     if (user is None):
+        print "User offline"
         json_response = response_builder(False, "User not signed in", "")
     else:
+        print "User online"
         user = json.loads(user[0])
         json_response = response_builder(True, "Token retrevied", user)
     c.commit()
@@ -104,6 +126,7 @@ def login(email, password):
         message = "User successfully logged in"
         result = generate_token()
         add_token(email, result)
+        print "Token added"
     else:
         success = False
         message = "Wrong password or username"
@@ -124,14 +147,18 @@ def get_user_by_token(token):
     return json.dumps(json_response)
 
 def delete_token(token):
+    print "------delete_token------"
     c = connect_db()
-    if (get_token(token) is False):
+    res = json.loads(get_token(token))
+    if (res["response"]["success"] is False):
         json_response = response_builder(False, "No such user", "")
+        print "No such user"
     else:
         user = json.loads(get_user_by_token(token))
         user = user["response"]["result"][0]["email"]
-        c.execute("update Users set token = '' where email = '"+ user +"'")
+        c.execute("update Users set token = NULL where email = '"+ user +"'")
         json_response = response_builder(True, "User signed out", "")
+        print "Token removed"
     c.commit()
     c.close()
     return json.dumps(json_response)
@@ -143,9 +170,15 @@ def add_user(email, password, firstname, familyname, gender, city, country):
     c.commit()
     c.close()
 
-def add_message(email,message):
+def add_message(token,email,message):
+    user = json.loads(get_user_by_token(token))
+    msg = {
+        "writer" : user["response"]["result"][0]["email"],
+        "content" : message
+    }
+    msg = json.dumps(msg)
     c = connect_db()
-    c.execute("insert into Messages (message,user) values(?,?)", (message,email))
+    c.execute("insert into Messages (message,user) values(?,?)", (msg,email))
     c.commit()
     c.close()
     json_response = response_builder(True, "Message added", "")
